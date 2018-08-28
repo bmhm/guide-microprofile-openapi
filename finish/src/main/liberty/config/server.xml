@@ -1,19 +1,28 @@
 <server description="Sample Liberty server">
 
   <featureManager>
-    <feature>jaxrs-2.0</feature>
-    <feature>jsonp-1.0</feature>
-    <feature>cdi-1.2</feature>
-    <feature>mpConfig-1.2</feature>
-    <feature>mpRestClient-1.0</feature>
-    <feature>mpOpenAPI-1.0</feature>
+    <feature>mpMetrics-1.1</feature>
+    <feature>microProfile-1.3</feature>
+    <feature>usr:opentracingZipkin-0.30</feature>
   </featureManager>
 
-  <httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}"
-      id="defaultHttpEndpoint" host="*" />
+  <mpMetrics authentication="false" />
+  <opentracingZipkin host="zipkin" />
+
+  <httpEndpoint id="defaultHttpEndpoint" httpPort="9080" host="*" />
+  <httpEndpoint id="serviceHttpEndpoint" httpPort="9081" host="*" />
+
+  <virtualHost id="service_host" allowFromEndpointRef="serviceHttpEndpoint">
+    <hostAlias>*:9081</hostAlias>
+  </virtualHost>
+  
+  <variable name="admin.virtual.host" value="service_host"/>
 
   <!-- <logging traceSpecification="com.ibm.ws.microprofile.openapi.*=all"/> -->
 
-  <webApplication location="mp-openapi.war" contextRoot="/" />
+  <!-- <webApplication location="TodoApplication.war" contextRoot="/" >
+    <classloader apiTypeVisibility="api,ibm-api,spec,stable,third-party"/>
+  </webApplication> -->
+  <applicationManager autoExpand="true"/>
 
 </server>

@@ -138,12 +138,16 @@
                 <artifactId>liberty-maven-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
-                    <assemblyArtifact>
+                    <!-- <assemblyArtifact>
                         <groupId>io.openliberty</groupId>
                         <artifactId>openliberty-runtime</artifactId>
                         <version>${version.openliberty-runtime}</version>
                         <type>zip</type>
-                    </assemblyArtifact>
+                    </assemblyArtifact> -->
+                    <assemblyArchive>/Users/dima/Downloads/wlp-NottyCode-4642-20180815-1555.zip</assemblyArchive>
+                    <!-- <install>
+                        <runtimeUrl>https://public.dhe.ibm.com/ibmdl/export/pub/software/openliberty/runtime/nightly/2018-08-07_1413/openliberty-all-18.0.0.3-20180807-1300.zip</runtimeUrl>
+                    </install> -->
                     <configFile>src/main/liberty/config/server.xml</configFile>
                     <include>usr</include>
                     <bootstrapProperties>
@@ -176,7 +180,7 @@
                             <appsDirectory>apps</appsDirectory>
                             <stripVersion>true</stripVersion>
                             <installAppPackages>project</installAppPackages>
-                            <looseApplication>true</looseApplication>
+                            <looseApplication>false</looseApplication>
                         </configuration>
                     </execution>
                     <execution>
